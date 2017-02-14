@@ -13,10 +13,15 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show, :create, :destroy, :update] do
     resources :contacts, only: :index
+    resources :comments, only: :index
   end
 
+  resources :contacts, only: [:show, :create, :destroy, :update] do
+    resources :comments, only: :index
+  end
 
-  resources :contacts, only: [:show, :create, :destroy, :update]
+  resources :comments, only: [:create, :destroy, :update]
+
   resources :contact_shares, only: [:create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

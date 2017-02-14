@@ -1,6 +1,8 @@
 class Contact < ActiveRecord::Base
   validates :email, presence: true, uniqueness: { scope: :user_id }
 
+  has_many :comments, as: :commentable
+
   belongs_to :owner, dependent: :destroy,
     class_name: :User,
     primary_key: :id,
@@ -14,4 +16,5 @@ class Contact < ActiveRecord::Base
   has_many :shared_users,
       through: :contact_shares,
       source: :user
+
 end

@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   validates :username, uniqueness: true, presence: true
 
+  has_many :comments, as: :commentable
+
   has_many :contacts,
     class_name: :Contact,
     primary_key: :id,
